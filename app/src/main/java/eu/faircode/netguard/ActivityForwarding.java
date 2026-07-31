@@ -64,7 +64,7 @@ public class ActivityForwarding extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Util.setTheme(this);
+        Util.setTheme(this, getWindow());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forwarding);
         Util.fixActionBar(this);

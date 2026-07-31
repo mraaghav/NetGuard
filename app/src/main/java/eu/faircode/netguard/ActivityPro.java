@@ -80,7 +80,7 @@ public class ActivityPro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "Create");
-        Util.setTheme(this);
+        Util.setTheme(this, getWindow());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pro);
         Util.fixActionBar(this);

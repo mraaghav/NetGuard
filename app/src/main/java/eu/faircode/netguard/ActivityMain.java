@@ -139,7 +139,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             return;
         }
 
-        Util.setTheme(this);
+        Util.setTheme(this, getWindow());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         Util.fixActionBar(this);

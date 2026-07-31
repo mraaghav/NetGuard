@@ -50,11 +50,17 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+import androidx.core.graphics.Insets;
 import androidx.core.net.ConnectivityManagerCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.preference.PreferenceManager;
 
 import java.io.BufferedReader;
@@ -497,7 +503,7 @@ public class Util {
         return (calculated != null && calculated.equals(expected));
     }
 
-    public static void setTheme(Context context) {
+    public static void setTheme(Context context, Window window) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         boolean dark = prefs.getBoolean("dark_theme", false);
         String theme = prefs.getString("theme", "teal");
@@ -516,6 +522,12 @@ public class Util {
 
         if (context instanceof Activity && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             setTaskColor(context);
+
+        if (window != null) {
+            WindowCompat.setDecorFitsSystemWindows(window, false);
+            WindowInsetsControllerCompat controller = WindowCompat.getInsetsController(window, window.getDecorView());
+            controller.setAppearanceLightStatusBars(true);
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -898,24 +910,35 @@ public class Util {
     }
 
     static void fixActionBar(Activity activity) {
-        TypedValue tv = new TypedValue();
-        activity.getTheme().resolveAttribute(
-                androidx.appcompat.R.attr.actionBarSize,
-                tv,
-                true
-        );
+        try {
+            TypedValue tv = new TypedValue();
+            activity.getTheme().resolveAttribute(
+                    androidx.appcompat.R.attr.actionBarSize,
+                    tv,
+                    true
+            );
 
-        int actionBarHeight = TypedValue.complexToDimensionPixelSize(
-                tv.data,
-                activity.getResources().getDisplayMetrics()
-        );
+            int actionBarHeight = TypedValue.complexToDimensionPixelSize(
+                    tv.data,
+                    activity.getResources().getDisplayMetrics()
+            );
 
-        View root = activity.findViewById(android.R.id.content);
-        root.setPadding(
-                root.getPaddingLeft(),
-                root.getPaddingTop() + actionBarHeight,
-                root.getPaddingRight(),
-                root.getPaddingBottom()
-        );
+            View root = activity.findViewById(android.R.id.content);
+            int top = root.getPaddingTop();
+            int bottom = root.getPaddingBottom();
+
+            ViewCompat.setOnApplyWindowInsetsListener(root, (v, insets) -> {
+                Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(
+                        v.getPaddingLeft(),
+                        top + actionBarHeight,
+                        v.getPaddingRight(),
+                        bottom + bars.bottom
+                );
+                return insets;
+            });
+        } catch (Throwable ex) {
+            Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
+        }
     }
 }

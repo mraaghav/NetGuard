@@ -111,7 +111,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
     private static final Intent INTENT_VPN_SETTINGS = new Intent("android.net.vpn.SETTINGS");
 
     protected void onCreate(Bundle savedInstanceState) {
-        Util.setTheme(this);
+        Util.setTheme(this, getWindow());
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new FragmentSettings()).commit();
         Util.fixActionBar(this);
