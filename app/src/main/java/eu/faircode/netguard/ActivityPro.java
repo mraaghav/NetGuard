@@ -83,6 +83,7 @@ public class ActivityPro extends AppCompatActivity {
         Util.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pro);
+        Util.fixActionBar(this);
 
         getSupportActionBar().setTitle(R.string.title_pro);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

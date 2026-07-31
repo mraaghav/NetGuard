@@ -47,6 +47,7 @@ public class ActivityForwardApproval extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forwardapproval);
+        Util.fixActionBar(this);
 
         final int protocol = getIntent().getIntExtra("protocol", 0);
         final int dport = getIntent().getIntExtra("dport", 0);

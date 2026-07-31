@@ -896,4 +896,26 @@ public class Util {
 
         return sb;
     }
+
+    static void fixActionBar(Activity activity) {
+        TypedValue tv = new TypedValue();
+        activity.getTheme().resolveAttribute(
+                androidx.appcompat.R.attr.actionBarSize,
+                tv,
+                true
+        );
+
+        int actionBarHeight = TypedValue.complexToDimensionPixelSize(
+                tv.data,
+                activity.getResources().getDisplayMetrics()
+        );
+
+        View root = activity.findViewById(android.R.id.content);
+        root.setPadding(
+                root.getPaddingLeft(),
+                root.getPaddingTop() + actionBarHeight,
+                root.getPaddingRight(),
+                root.getPaddingBottom()
+        );
+    }
 }

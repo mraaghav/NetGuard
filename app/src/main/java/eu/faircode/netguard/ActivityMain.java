@@ -126,6 +126,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             Log.i(TAG, "SDK=" + Build.VERSION.SDK_INT);
             super.onCreate(savedInstanceState);
             setContentView(R.layout.android);
+            Util.fixActionBar(this);
             return;
         }
 
@@ -134,12 +135,14 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             Log.i(TAG, "Xposed running");
             super.onCreate(savedInstanceState);
             setContentView(R.layout.xposed);
+            Util.fixActionBar(this);
             return;
         }
 
         Util.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        Util.fixActionBar(this);
 
         running = true;
 

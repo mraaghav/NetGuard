@@ -114,6 +114,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
         Util.setTheme(this);
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new FragmentSettings()).commit();
+        Util.fixActionBar(this);
         getSupportActionBar().setTitle(R.string.menu_settings);
         running = true;
     }
