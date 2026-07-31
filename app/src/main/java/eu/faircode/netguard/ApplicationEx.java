@@ -74,33 +74,31 @@ public class ApplicationEx extends Application {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM && false) {
-                    View content = activity.findViewById(android.R.id.content);
-                    ViewCompat.setOnApplyWindowInsetsListener(content, new OnApplyWindowInsetsListener() {
-                        @NonNull
-                        @Override
-                        public WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
-                            Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
+                View content = activity.findViewById(android.R.id.content);
+                ViewCompat.setOnApplyWindowInsetsListener(content, new OnApplyWindowInsetsListener() {
+                    @NonNull
+                    @Override
+                    public WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
+                        Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
 
-                            TypedValue tv = new TypedValue();
-                            activity.getTheme().resolveAttribute(R.attr.colorPrimaryDark, tv, true);
+                        TypedValue tv = new TypedValue();
+                        activity.getTheme().resolveAttribute(R.attr.colorPrimaryDark, tv, true);
 
-                            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-                            boolean dark = prefs.getBoolean("dark_theme", false);
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+                        boolean dark = prefs.getBoolean("dark_theme", false);
 
-                            activity.getWindow().getDecorView().setBackgroundColor(tv.data);
-                            content.setBackgroundColor(dark ? Color.parseColor("#ff121212") : Color.WHITE);
+                        activity.getWindow().getDecorView().setBackgroundColor(tv.data);
+                        content.setBackgroundColor(dark ? Color.parseColor("#ff121212") : Color.WHITE);
 
-                            int actionBarHeight = Util.dips2pixels(56, activity);
-                            View decor = activity.getWindow().getDecorView();
-                            WindowCompat.getInsetsController(activity.getWindow(), decor).setAppearanceLightStatusBars(false);
-                            WindowCompat.getInsetsController(activity.getWindow(), decor).setAppearanceLightNavigationBars(!dark);
-                            v.setPadding(bars.left, bars.top + actionBarHeight, bars.right, bars.bottom);
+                        int actionBarHeight = Util.getActionBarHeight(activity);
+                        View decor = activity.getWindow().getDecorView();
+                        WindowCompat.getInsetsController(activity.getWindow(), decor).setAppearanceLightStatusBars(false);
+                        WindowCompat.getInsetsController(activity.getWindow(), decor).setAppearanceLightNavigationBars(!dark);
+                        v.setPadding(bars.left, bars.top + actionBarHeight, bars.right, bars.bottom);
 
-                            return insets;
-                        }
-                    });
-                }
+                        return insets;
+                    }
+                });
             }
 
             @Override

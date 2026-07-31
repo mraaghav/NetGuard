@@ -54,10 +54,9 @@ public class ActivityDns extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Util.setTheme(this, getWindow());
+        Util.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.resolving);
-        Util.fixActionBar(this);
 
         getSupportActionBar().setTitle(R.string.setting_show_resolved);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

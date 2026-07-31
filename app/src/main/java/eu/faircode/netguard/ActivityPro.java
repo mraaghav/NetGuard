@@ -80,10 +80,9 @@ public class ActivityPro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "Create");
-        Util.setTheme(this, getWindow());
+        Util.setTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pro);
-        Util.fixActionBar(this);
 
         getSupportActionBar().setTitle(R.string.title_pro);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
