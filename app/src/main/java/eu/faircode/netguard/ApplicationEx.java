@@ -81,6 +81,7 @@ public class ApplicationEx extends Application {
                     @Override
                     public WindowInsetsCompat onApplyWindowInsets(@NonNull View v, @NonNull WindowInsetsCompat insets) {
                         Insets bars = insets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout() | WindowInsetsCompat.Type.ime());
+                        Log.i(TAG, "Insets bars=" + bars);
 
                         TypedValue tv = new TypedValue();
                         activity.getTheme().resolveAttribute(R.attr.colorPrimaryDark, tv, true);
@@ -89,14 +90,14 @@ public class ApplicationEx extends Application {
                         boolean dark = prefs.getBoolean("dark_theme", false);
 
                         View decor = activity.getWindow().getDecorView();
-
                         decor.setBackgroundColor(tv.data);
                         content.setBackgroundColor(dark ? Color.parseColor("#ff121212") : Color.WHITE);
 
-                        int actionBarHeight = Util.getActionBarHeight(activity);
                         WindowInsetsControllerCompat controller = WindowCompat.getInsetsController(activity.getWindow(), decor);
                         controller.setAppearanceLightStatusBars(false);
                         controller.setAppearanceLightNavigationBars(!dark);
+
+                        int actionBarHeight = Util.getActionBarHeight(activity);
                         v.setPadding(bars.left, bars.top + actionBarHeight, bars.right, bars.bottom);
 
                         return insets;
