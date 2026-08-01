@@ -41,6 +41,7 @@ import androidx.core.view.OnApplyWindowInsetsListener;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.preference.PreferenceManager;
 
 public class ApplicationEx extends Application {
@@ -87,13 +88,15 @@ public class ApplicationEx extends Application {
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
                         boolean dark = prefs.getBoolean("dark_theme", false);
 
-                        activity.getWindow().getDecorView().setBackgroundColor(tv.data);
+                        View decor = activity.getWindow().getDecorView();
+
+                        decor.setBackgroundColor(tv.data);
                         content.setBackgroundColor(dark ? Color.parseColor("#ff121212") : Color.WHITE);
 
                         int actionBarHeight = Util.getActionBarHeight(activity);
-                        View decor = activity.getWindow().getDecorView();
-                        WindowCompat.getInsetsController(activity.getWindow(), decor).setAppearanceLightStatusBars(false);
-                        WindowCompat.getInsetsController(activity.getWindow(), decor).setAppearanceLightNavigationBars(!dark);
+                        WindowInsetsControllerCompat controller = WindowCompat.getInsetsController(activity.getWindow(), decor);
+                        controller.setAppearanceLightStatusBars(false);
+                        controller.setAppearanceLightNavigationBars(!dark);
                         v.setPadding(bars.left, bars.top + actionBarHeight, bars.right, bars.bottom);
 
                         return insets;
