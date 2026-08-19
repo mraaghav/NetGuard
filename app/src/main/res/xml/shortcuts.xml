@@ -8,7 +8,7 @@
         android:shortcutShortLabel="@string/menu_settings">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="eu.faircode.FireWall.ActivitySettings"
+            android:targetClass="eu.faircode.netguard.ActivitySettings"
             android:targetPackage="com.techtheos.firewall" />
         <categories android:name="android.shortcut.settings" />
     </shortcut>
@@ -21,7 +21,7 @@
         android:shortcutShortLabel="@string/menu_log">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="eu.faircode.FireWall.ActivityLog"
+            android:targetClass="eu.faircode.netguard.ActivityLog"
             android:targetPackage="com.techtheos.firewall" />
         <categories android:name="android.shortcut.log" />
     </shortcut>
