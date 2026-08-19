@@ -59,7 +59,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ActivityLog extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-    private static final String TAG = "NetGuard.Log";
+    private static final String TAG = "FireWall.Log";
 
     private boolean running = false;
     private ListView lvLog;
@@ -381,7 +381,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         // https://gist.github.com/granoeste/5574148
-        File pcap_file = new File(getDir("data", MODE_PRIVATE), "netguard.pcap");
+        File pcap_file = new File(getDir("data", MODE_PRIVATE), "FireWall.pcap");
 
         boolean export = (getPackageManager().resolveActivity(getIntentPCAPDocument(), 0) != null);
 
@@ -404,7 +404,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        final File pcap_file = new File(getDir("data", MODE_PRIVATE), "netguard.pcap");
+        final File pcap_file = new File(getDir("data", MODE_PRIVATE), "FireWall.pcap");
 
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -505,13 +505,6 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                 }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 return true;
 
-            case R.id.menu_log_support:
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://github.com/M66B/NetGuard/blob/master/FAQ.md#user-content-faq27"));
-                if (getPackageManager().resolveActivity(intent, 0) != null)
-                    startActivity(intent);
-                return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -560,7 +553,7 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
                 intent = new Intent("org.openintents.action.PICK_DIRECTORY");
             } else {
                 intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=org.openintents.filemanager"));
+                intent.setData(Uri.EMPTY);
             }
         } else {
             intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
@@ -597,11 +590,11 @@ public class ActivityLog extends AppCompatActivity implements SharedPreferences.
 
                     Uri target = data.getData();
                     if (data.hasExtra("org.openintents.extra.DIR_PATH"))
-                        target = Uri.parse(target + "/netguard.pcap");
+                        target = Uri.parse(target + "/firewall.pcap");
                     Log.i(TAG, "Export PCAP URI=" + target);
                     out = getContentResolver().openOutputStream(target);
 
-                    File pcap = new File(getDir("data", MODE_PRIVATE), "netguard.pcap");
+                    File pcap = new File(getDir("data", MODE_PRIVATE), "FireWall.pcap");
                     in = new FileInputStream(pcap);
 
                     int len;

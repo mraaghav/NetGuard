@@ -45,7 +45,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class Rule {
-    private static final String TAG = "NetGuard.Rule";
+    private static final String TAG = "FireWall.Rule";
 
     public int uid;
     public String packageName;

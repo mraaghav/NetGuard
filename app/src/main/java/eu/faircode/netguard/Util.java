@@ -82,7 +82,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class Util {
-    private static final String TAG = "NetGuard.Util";
+    private static final String TAG = "FireWall.Util";
 
     // Roam like at home
     private static final List<String> listEU = Arrays.asList(
@@ -753,15 +753,15 @@ public class Util {
                 06-14 13:02:41.518 19703 19703 E AndroidRuntime:        at eu.faircode.netguard.Util.getGeneralInfo(SourceFile:744)
                 06-14 13:02:41.518 19703 19703 E AndroidRuntime:        at eu.faircode.netguard.ActivitySettings.updateTechnicalInfo(SourceFile:858)
                 06-14 13:02:41.518 19703 19703 E AndroidRuntime:        at eu.faircode.netguard.ActivitySettings.onPostCreate(SourceFile:425)
-                06-14 13:02:41.520 19703 19703 W NetGuard.App: java.lang.SecurityException: getDataNetworkTypeForSubscriber
-                06-14 13:02:41.520 19703 19703 W NetGuard.App: java.lang.SecurityException: getDataNetworkTypeForSubscriber
-                06-14 13:02:41.520 19703 19703 W NetGuard.App:  at android.os.Parcel.createExceptionOrNull(Parcel.java:2373)
-                06-14 13:02:41.520 19703 19703 W NetGuard.App:  at android.os.Parcel.createException(Parcel.java:2357)
-                06-14 13:02:41.520 19703 19703 W NetGuard.App:  at android.os.Parcel.readException(Parcel.java:2340)
-                06-14 13:02:41.520 19703 19703 W NetGuard.App:  at android.os.Parcel.readException(Parcel.java:2282)
-                06-14 13:02:41.520 19703 19703 W NetGuard.App:  at com.android.internal.telephony.ITelephony$Stub$Proxy.getNetworkTypeForSubscriber(ITelephony.java:8711)
-                06-14 13:02:41.520 19703 19703 W NetGuard.App:  at android.telephony.TelephonyManager.getNetworkType(TelephonyManager.java:2945)
-                06-14 13:02:41.520 19703 19703 W NetGuard.App:  at android.telephony.TelephonyManager.getNetworkType(TelephonyManager.java:2909)
+                06-14 13:02:41.520 19703 19703 W FireWall.App: java.lang.SecurityException: getDataNetworkTypeForSubscriber
+                06-14 13:02:41.520 19703 19703 W FireWall.App: java.lang.SecurityException: getDataNetworkTypeForSubscriber
+                06-14 13:02:41.520 19703 19703 W FireWall.App:  at android.os.Parcel.createExceptionOrNull(Parcel.java:2373)
+                06-14 13:02:41.520 19703 19703 W FireWall.App:  at android.os.Parcel.createException(Parcel.java:2357)
+                06-14 13:02:41.520 19703 19703 W FireWall.App:  at android.os.Parcel.readException(Parcel.java:2340)
+                06-14 13:02:41.520 19703 19703 W FireWall.App:  at android.os.Parcel.readException(Parcel.java:2282)
+                06-14 13:02:41.520 19703 19703 W FireWall.App:  at com.android.internal.telephony.ITelephony$Stub$Proxy.getNetworkTypeForSubscriber(ITelephony.java:8711)
+                06-14 13:02:41.520 19703 19703 W FireWall.App:  at android.telephony.TelephonyManager.getNetworkType(TelephonyManager.java:2945)
+                06-14 13:02:41.520 19703 19703 W FireWall.App:  at android.telephony.TelephonyManager.getNetworkType(TelephonyManager.java:2909)
              */
         }
 

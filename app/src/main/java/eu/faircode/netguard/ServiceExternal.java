@@ -41,10 +41,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ServiceExternal extends IntentService {
-    private static final String TAG = "NetGuard.External";
-    private static final String ACTION_DOWNLOAD_HOSTS_FILE = "eu.faircode.netguard.DOWNLOAD_HOSTS_FILE";
+    private static final String TAG = "FireWall.External";
+    private static final String ACTION_DOWNLOAD_HOSTS_FILE = "com.techtheos.firewall.DOWNLOAD_HOSTS_FILE";
 
-    // am startservice -a eu.faircode.netguard.DOWNLOAD_HOSTS_FILE
+    // am startservice -a com.techtheos.firewall.DOWNLOAD_HOSTS_FILE
 
     public ServiceExternal() {
         super(TAG);
@@ -62,7 +62,7 @@ public class ServiceExternal extends IntentService {
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
                 String hosts_url = prefs.getString("hosts_url", null);
-                if ("https://www.netguard.me/hosts".equals(hosts_url))
+                if ("".equals(hosts_url))
                     hosts_url = BuildConfig.HOSTS_FILE_URI;
 
                 File tmp = new File(getFilesDir(), "hosts.tmp");

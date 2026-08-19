@@ -51,7 +51,7 @@ import androidx.core.app.NavUtils;
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 
 public class ActivityPro extends AppCompatActivity {
-    private static final String TAG = "NetGuard.Pro";
+    private static final String TAG = "FireWall.Pro";
 
     private IAB iab;
 
@@ -145,7 +145,7 @@ public class ActivityPro extends AppCompatActivity {
                 }
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("http://www.netguard.me/#" + sku));
+                intent.setData(Uri.EMPTY);
                 if (intent.resolveActivity(getPackageManager()) != null)
                     startActivity(intent);
             }

@@ -38,7 +38,7 @@ import java.util.Date;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class ServiceTileMain extends TileService implements SharedPreferences.OnSharedPreferenceChangeListener {
-    private static final String TAG = "NetGuard.TileMain";
+    private static final String TAG = "FireWall.TileMain";
 
     public void onStartListening() {
         Log.i(TAG, "Start listening");

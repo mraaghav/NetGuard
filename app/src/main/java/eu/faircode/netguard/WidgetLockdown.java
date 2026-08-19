@@ -32,7 +32,7 @@ import android.widget.RemoteViews;
 import androidx.preference.PreferenceManager;
 
 public class WidgetLockdown extends AppWidgetProvider {
-    private static final String TAG = "NetGuard.WidgetLock";
+    private static final String TAG = "FireWall.WidgetLock";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {

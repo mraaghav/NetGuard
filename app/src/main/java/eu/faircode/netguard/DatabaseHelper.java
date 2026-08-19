@@ -43,7 +43,7 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String TAG = "NetGuard.Database";
+    private static final String TAG = "FireWall.Database";
 
     private static final String DB_NAME = "Netguard";
     private static final int DB_VERSION = 22;

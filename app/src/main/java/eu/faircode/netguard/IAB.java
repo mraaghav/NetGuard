@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IAB implements ServiceConnection {
-    private static final String TAG = "NetGuard.IAB";
+    private static final String TAG = "FireWall.IAB";
 
     private Context context;
     private Delegate delegate;

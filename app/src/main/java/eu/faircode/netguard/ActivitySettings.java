@@ -96,7 +96,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 
 public class ActivitySettings extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-    private static final String TAG = "NetGuard.Settings";
+    private static final String TAG = "FireWall.Settings";
 
     private boolean running = false;
 
@@ -370,7 +370,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
                     EditTextPreference pref_hosts_url = (EditTextPreference) screen.findPreference("hosts_url");
                     String hosts_url = pref_hosts_url.getText();
-                    if ("https://www.netguard.me/hosts".equals(hosts_url))
+                    if ("".equals(hosts_url))
                         hosts_url = BuildConfig.HOSTS_FILE_URI;
 
                     try {
@@ -753,7 +753,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
 
             ServiceSinkhole.setPcap(false, this);
 
-            File pcap_file = new File(getDir("data", MODE_PRIVATE), "netguard.pcap");
+            File pcap_file = new File(getDir("data", MODE_PRIVATE), "FireWall.pcap");
             if (pcap_file.exists() && !pcap_file.delete())
                 Log.w(TAG, "Delete PCAP failed");
 
@@ -908,7 +908,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 intent = new Intent("org.openintents.action.PICK_DIRECTORY");
             } else {
                 intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=org.openintents.filemanager"));
+                intent.setData(Uri.EMPTY);
             }
         } else {
             intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
@@ -949,7 +949,7 @@ public class ActivitySettings extends AppCompatActivity implements SharedPrefere
                 try {
                     Uri target = data.getData();
                     if (data.hasExtra("org.openintents.extra.DIR_PATH"))
-                        target = Uri.parse(target + "/netguard_" + new SimpleDateFormat("yyyyMMdd").format(new Date().getTime()) + ".xml");
+                        target = Uri.parse(target + "/firewall_" + new SimpleDateFormat("yyyyMMdd").format(new Date().getTime()) + ".xml");
                     Log.i(TAG, "Writing URI=" + target);
                     out = getContentResolver().openOutputStream(target);
                     xmlExport(out);

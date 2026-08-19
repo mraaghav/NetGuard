@@ -117,7 +117,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import javax.net.ssl.HttpsURLConnection;
 
 public class ServiceSinkhole extends VpnService implements SharedPreferences.OnSharedPreferenceChangeListener {
-    private static final String TAG = "NetGuard.Service";
+    private static final String TAG = "FireWall.Service";
 
     private boolean registeredUser = false;
     private boolean registeredIdleState = false;
@@ -200,9 +200,9 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
 
     private ExecutorService executor = Executors.newCachedThreadPool();
 
-    private static final String ACTION_HOUSE_HOLDING = "eu.faircode.netguard.HOUSE_HOLDING";
-    private static final String ACTION_SCREEN_OFF_DELAYED = "eu.faircode.netguard.SCREEN_OFF_DELAYED";
-    private static final String ACTION_WATCHDOG = "eu.faircode.netguard.WATCHDOG";
+    private static final String ACTION_HOUSE_HOLDING = "com.techtheos.firewall.HOUSE_HOLDING";
+    private static final String ACTION_SCREEN_OFF_DELAYED = "com.techtheos.firewall.SCREEN_OFF_DELAYED";
+    private static final String ACTION_WATCHDOG = "com.techtheos.firewall.WATCHDOG";
 
     private native long jni_init(int sdk);
 
@@ -247,7 +247,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
         }
 
-        File pcap = (enabled ? new File(context.getDir("data", MODE_PRIVATE), "netguard.pcap") : null);
+        File pcap = (enabled ? new File(context.getDir("data", MODE_PRIVATE), "FireWall.pcap") : null);
         jni_pcap(pcap == null ? null : pcap.getAbsolutePath(), record_size, file_size);
     }
 
@@ -1672,7 +1672,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
                         Log.i(TAG, "Invalid hosts file line: " + line);
                 }
             }
-            mapHostsBlocked.put("test.netguard.me", true);
+            mapHostsBlocked.put("test.firewall.local", true);
             Log.i(TAG, count + " hosts read");
         } catch (IOException ex) {
             Log.e(TAG, ex.toString() + "\n" + Log.getStackTraceString(ex));
@@ -2258,7 +2258,7 @@ public class ServiceSinkhole extends VpnService implements SharedPreferences.OnS
     };
 
     ConnectivityManager.NetworkCallback networkMonitorCallback = new ConnectivityManager.NetworkCallback() {
-        private String TAG = "NetGuard.Monitor";
+        private String TAG = "FireWall.Monitor";
 
         private Map<Network, Long> validated = new HashMap<>();
 

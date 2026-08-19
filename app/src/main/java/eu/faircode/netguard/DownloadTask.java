@@ -43,7 +43,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class DownloadTask extends AsyncTask<Object, Integer, Object> {
-    private static final String TAG = "NetGuard.Download";
+    private static final String TAG = "FireWall.Download";
 
     private Context context;
     private URL url;

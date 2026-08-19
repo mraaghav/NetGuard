@@ -79,7 +79,7 @@ import java.net.URL;
 import java.util.List;
 
 public class ActivityMain extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
-    private static final String TAG = "NetGuard.Main";
+    private static final String TAG = "FireWall.Main";
 
     private boolean running = false;
     private ImageView ivIcon;
@@ -104,8 +104,8 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
 
     private static final int MIN_SDK = Build.VERSION_CODES.LOLLIPOP_MR1;
 
-    public static final String ACTION_RULES_CHANGED = "eu.faircode.netguard.ACTION_RULES_CHANGED";
-    public static final String ACTION_QUEUE_CHANGED = "eu.faircode.netguard.ACTION_QUEUE_CHANGED";
+    public static final String ACTION_RULES_CHANGED = "com.techtheos.firewall.ACTION_RULES_CHANGED";
+    public static final String ACTION_QUEUE_CHANGED = "com.techtheos.firewall.ACTION_QUEUE_CHANGED";
     public static final String EXTRA_REFRESH = "Refresh";
     public static final String EXTRA_SEARCH = "Search";
     public static final String EXTRA_RELATED = "Related";
@@ -350,12 +350,11 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
             }
         });
 
-        final LinearLayout llFairEmail = findViewById(R.id.llFairEmail);
-        TextView tvFairEmail = findViewById(R.id.tvFairEmail);
+        final LinearLayout llFairEmail = findViewById(R.id.llEmail);
+        TextView tvFairEmail = findViewById(R.id.tvEmail);
         tvFairEmail.setMovementMethod(LinkMovementMethod.getInstance());
-        Button btnFairEmail = findViewById(R.id.btnFairEmail);
-        boolean hintFairEmail = prefs.getBoolean("hint_fairemail", true);
-        llFairEmail.setVisibility(hintFairEmail ? View.VISIBLE : View.GONE);
+        Button btnFairEmail = findViewById(R.id.btnEmail);
+        llFairEmail.setVisibility(View.GONE);
         btnFairEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -836,14 +835,6 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         if (!IAB.isPurchasedAny(this))
             markPro(menu.findItem(R.id.menu_pro), null);
 
-        if (!Util.hasValidFingerprint(this) || getIntentInvite(this).resolveActivity(pm) == null)
-            menu.removeItem(R.id.menu_invite);
-
-        if (getIntentSupport().resolveActivity(getPackageManager()) == null)
-            menu.removeItem(R.id.menu_support);
-
-        menu.findItem(R.id.menu_apps).setEnabled(getIntentApps(this).resolveActivity(pm) != null);
-
         return true;
     }
 
@@ -950,24 +941,12 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
                 startActivity(new Intent(ActivityMain.this, ActivityPro.class));
                 return true;
 
-            case R.id.menu_invite:
-                startActivityForResult(getIntentInvite(this), REQUEST_INVITE);
-                return true;
-
             case R.id.menu_legend:
                 menu_legend();
                 return true;
 
-            case R.id.menu_support:
-                startActivity(getIntentSupport());
-                return true;
-
             case R.id.menu_about:
                 menu_about();
-                return true;
-
-            case R.id.menu_apps:
-                menu_apps();
                 return true;
 
             default:
@@ -1284,7 +1263,7 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         tvPrivacy.setMovementMethod(LinkMovementMethod.getInstance());
 
         // Handle rate
-        btnRate.setVisibility(getIntentRate(this).resolveActivity(getPackageManager()) == null ? View.GONE : View.VISIBLE);
+        btnRate.setVisibility(View.GONE);
         btnRate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1306,42 +1285,19 @@ public class ActivityMain extends AppCompatActivity implements SharedPreferences
         dialogAbout.show();
     }
 
-    private void menu_apps() {
-        startActivity(getIntentApps(this));
-    }
-
     private static Intent getIntentPro(Context context) {
-        if (Util.isPlayStoreInstall(context))
-            return new Intent(context, ActivityPro.class);
-        else {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("https://contact.faircode.eu/?product=netguardstandalone"));
-            return intent;
-        }
+        return new Intent(context, ActivityPro.class);
     }
 
     private static Intent getIntentInvite(Context context) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name));
-        intent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.msg_try) + "\n\nhttps://www.netguard.me/\n\n");
+        intent.putExtra(Intent.EXTRA_TEXT, context.getString(R.string.msg_try));
         return intent;
-    }
-
-    private static Intent getIntentApps(Context context) {
-        return new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/dev?id=8420080860664580239"));
     }
 
     private static Intent getIntentRate(Context context) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.getPackageName()));
-        if (intent.resolveActivity(context.getPackageManager()) == null)
-            intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + context.getPackageName()));
-        return intent;
-    }
-
-    private static Intent getIntentSupport() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("https://github.com/M66B/NetGuard/blob/master/FAQ.md"));
-        return intent;
+        return new Intent(context, ActivityMain.class);
     }
 }

@@ -31,9 +31,9 @@ import android.widget.TextView;
 import java.net.InetAddress;
 
 public class ActivityForwardApproval extends Activity {
-    private static final String TAG = "NetGuard.Forward";
-    private static final String ACTION_START_PORT_FORWARD = "eu.faircode.netguard.START_PORT_FORWARD";
-    private static final String ACTION_STOP_PORT_FORWARD = "eu.faircode.netguard.STOP_PORT_FORWARD";
+    private static final String TAG = "FireWall.Forward";
+    private static final String ACTION_START_PORT_FORWARD = "com.techtheos.firewall.START_PORT_FORWARD";
+    private static final String ACTION_STOP_PORT_FORWARD = "com.techtheos.firewall.STOP_PORT_FORWARD";
 
     static {
         try {
@@ -88,7 +88,7 @@ public class ActivityForwardApproval extends Activity {
             public void onClick(View view) {
                 if (ACTION_START_PORT_FORWARD.equals(getIntent().getAction())) {
 /*
-am start -a eu.faircode.netguard.START_PORT_FORWARD \
+am start -a com.techtheos.firewall.START_PORT_FORWARD \
 -n eu.faircode.netguard/eu.faircode.netguard.ActivityForwardApproval \
 --ei protocol 17 \
 --ei dport 53 \
@@ -104,7 +104,7 @@ am start -a eu.faircode.netguard.START_PORT_FORWARD \
 
                 } else if (ACTION_STOP_PORT_FORWARD.equals(getIntent().getAction())) {
 /*
-am start -a eu.faircode.netguard.STOP_PORT_FORWARD \
+am start -a com.techtheos.firewall.STOP_PORT_FORWARD \
 -n eu.faircode.netguard/eu.faircode.netguard.ActivityForwardApproval \
 --ei protocol 17 \
 --ei dport 53 \

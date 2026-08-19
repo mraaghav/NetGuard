@@ -34,13 +34,13 @@ import androidx.preference.PreferenceManager;
 import java.util.Date;
 
 public class WidgetAdmin extends ReceiverAutostart {
-    private static final String TAG = "NetGuard.Widget";
+    private static final String TAG = "FireWall.Widget";
 
-    public static final String INTENT_ON = "eu.faircode.netguard.ON";
-    public static final String INTENT_OFF = "eu.faircode.netguard.OFF";
+    public static final String INTENT_ON = "com.techtheos.firewall.ON";
+    public static final String INTENT_OFF = "com.techtheos.firewall.OFF";
 
-    public static final String INTENT_LOCKDOWN_ON = "eu.faircode.netguard.LOCKDOWN_ON";
-    public static final String INTENT_LOCKDOWN_OFF = "eu.faircode.netguard.LOCKDOWN_OFF";
+    public static final String INTENT_LOCKDOWN_ON = "com.techtheos.firewall.LOCKDOWN_ON";
+    public static final String INTENT_LOCKDOWN_OFF = "com.techtheos.firewall.LOCKDOWN_OFF";
 
     @Override
     public void onReceive(Context context, Intent intent) {

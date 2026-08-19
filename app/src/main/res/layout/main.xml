@@ -68,7 +68,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/llFairEmail"
+            android:id="@+id/llEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -76,16 +76,16 @@
             android:visibility="gone">
 
             <TextView
-                android:id="@+id/tvFairEmail"
+                android:id="@+id/tvEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:text="@string/msg_fairemail"
+                android:text="@string/msg_Email"
                 android:textAppearance="@style/TextSmall" />
 
             <Button
-                android:id="@+id/btnFairEmail"
+                android:id="@+id/btnEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

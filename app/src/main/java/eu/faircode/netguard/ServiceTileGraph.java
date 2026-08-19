@@ -33,7 +33,7 @@ import androidx.preference.PreferenceManager;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class ServiceTileGraph extends TileService implements SharedPreferences.OnSharedPreferenceChangeListener {
-    private static final String TAG = "NetGuard.TileGraph";
+    private static final String TAG = "FireWall.TileGraph";
 
     public void onStartListening() {
         Log.i(TAG, "Start listening");

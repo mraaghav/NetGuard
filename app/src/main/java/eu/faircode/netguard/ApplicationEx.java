@@ -49,7 +49,7 @@ import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.preference.PreferenceManager;
 
 public class ApplicationEx extends Application {
-    private static final String TAG = "NetGuard.App";
+    private static final String TAG = "FireWall.App";
 
     private Thread.UncaughtExceptionHandler mPrevHandler;
 

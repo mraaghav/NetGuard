@@ -78,7 +78,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AdapterRule extends RecyclerView.Adapter<AdapterRule.ViewHolder> implements Filterable {
-    private static final String TAG = "NetGuard.Adapter";
+    private static final String TAG = "FireWall.Adapter";
 
     private View anchor;
     private LayoutInflater inflater;
